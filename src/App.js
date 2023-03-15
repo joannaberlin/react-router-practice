@@ -6,6 +6,9 @@ import {
 } from 'react-router-dom';
 import Home from './pages/Home';
 import Products from './pages/Products';
+import RootLayout from './pages/RootLayout';
+import Error from './pages/Error';
+import ProductDetail from './pages/ProductDetail';
 
 // const routeDefinitions = createRoutesFromElements(
 // 	<Route>
@@ -15,8 +18,16 @@ import Products from './pages/Products';
 // );
 
 const router = createBrowserRouter([
-	{ path: '/', element: <Home /> },
-	{ path: '/products', element: <Products /> },
+	{
+		path: '/',
+		element: <RootLayout />,
+		errorElement: <Error />,
+		children: [
+			{ index: true, element: <Home /> }, //path: ''
+			{ path: 'products', element: <Products /> },
+			{ path: 'products/:productId', element: <ProductDetail /> },
+		],
+	},
 ]);
 
 // const router = createBrowserRouter(routeDefinitions);
